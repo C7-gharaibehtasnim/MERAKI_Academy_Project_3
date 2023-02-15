@@ -23,8 +23,14 @@ return elemnt.author==author
  })
  res.status(200).json(result) 
 }
-
+const getArticleById=(req,res)=>
+{
+  const id=req.params.id
+ const result= articles.filter(elemnt=>elemnt.id==id)
+ res.status(200).json(result)
+}
 module.exports = {
   getAllArticles,
-  getArticlesByAuthor
+  getArticlesByAuthor,
+  getArticleById
 };
