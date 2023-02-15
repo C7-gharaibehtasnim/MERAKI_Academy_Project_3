@@ -6,7 +6,7 @@ const getAllArticles = (req, res) => {
   res.json(articles);
 };
 const getArticlesByAuthor = (req, res) => {
-  const author = req.query.auther;
+  const author = req.query.author;
   console.log(typeof author);
   let myart;
 
@@ -64,11 +64,29 @@ else
 }
 
 }
+const deleteArticlesByAuthor=(req,res)=>
+{
+  const author = req.params.name;
+  
+  
+  const found = articles.find((elemnt) => elemnt.author == author);
+  if (found) {
+    articles.splice(found,1)
+    res.status(200).json({sucess:true,message: `Succeeded to delete article with id:${author}`})
+  }
+else
+{
+  res.status(404).json({sucess:false,message: `failed to delete article with id:${author}`})
+
+}
+
+}
 module.exports = {
   getAllArticles,
   getArticlesByAuthor,
   getArticleById,
   createNewArticle,
   updateArticleById,
-  deleteArticleById
+  deleteArticleById,
+  deleteArticlesByAuthor
 };
