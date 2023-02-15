@@ -40,9 +40,42 @@ const createNewArticle=(req,res)=>
   articles.push(NewArticle)
   res.status(201).json(articles)
 }
+
+
+const updateArticleById=(req,res)=>
+{
+  const id=req.params.id
+  const newdata=req.body
+  const found=articles.find(elemnt=>elemnt.id==id)
+  if(found)
+  {
+    // if(newdata.title=="")
+    // {
+    //   newdata.title=found.title
+    // }
+    // if(newdata.description=="")
+    // {
+    //   newdata.description=found.description
+    // }
+    // if(newdata.auther=="")
+    // {
+    //   newdata.auther=found.author
+    // }
+
+   articles.splice(found,1,{title:newdata.title||found.title,description:newdata.description||found.description,author:newdata.author||found.author})
+res.status(200).json(articles)
+  }
+else
+{
+  res.json("this Article not found ")
+}
+
+
+}
 module.exports = {
   getAllArticles,
   getArticlesByAuthor,
   getArticleById,
-  createNewArticle
+  createNewArticle,
+  updateArticleById
 };
